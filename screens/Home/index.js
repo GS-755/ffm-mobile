@@ -72,7 +72,7 @@ const HomeScreen = () => {
         <Categories />
         {/* Featured */}
         <FeaturedRow
-          title="Đặc sắc "
+          title="Đặc sắc"
           id="1"
           description="Miễn phí giao hàng"
           featuredCategory="featured"

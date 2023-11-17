@@ -1,9 +1,50 @@
 //import liraries
 import { ScrollView } from "react-native";
 import CategoryCard from "../CatrgoryCard";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
+// fetch API async function
+function useFetch(url) {
+  const [cate, setCate] = useState(null);
+  useEffect(() => {
+    axios.get(url)
+      .then(
+        response => setCate(response.data)
+      )
+  }, [url]);
+
+  return cate;
+}
+
+const fetchCateUri = 'http://192.168.1.110:8080/api/foodcategory';
 // create a component
 const Categories = () => {
+  const categories = useFetch(fetchCateUri);
+  if (categories != null) {
+    return (
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 15,
+          paddingTop: 10,
+        }}
+        horizontal
+      >
+        {
+          categories.map(k => (
+            <CategoryCard
+              key={k.idFc}
+              imageUrl="https://cdn.tgdd.vn/Files/2017/03/22/963765/cach-lam-ga-ran-thom-ngon-8_760x450.jpg"
+              title={k.name}
+            />
+          ))
+        }
+      </ScrollView>
+    );
+  }
+
+  {/* If Data === null thì return data fake (nói thẳng là ssskkk...) */ }
   return (
     <ScrollView
       showsHorizontalScrollIndicator={false}
