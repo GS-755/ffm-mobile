@@ -1,23 +1,9 @@
 //import liraries
 import { ScrollView } from "react-native";
 import CategoryCard from "../CatrgoryCard";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import useFetch from "../../api/fetch-api";
 
-// fetch API async function
-function useFetch(url) {
-  const [cate, setCate] = useState(null);
-  useEffect(() => {
-    axios.get(url)
-      .then(
-        response => setCate(response.data)
-      )
-  }, [url]);
-
-  return cate;
-}
-
-const fetchCateUri = 'http://192.168.1.110:8080/api/foodcategory';
+const fetchCateUri = 'http://192.168.1.8:8080/api/foodcategory';
 // create a component
 const Categories = () => {
   const categories = useFetch(fetchCateUri);
